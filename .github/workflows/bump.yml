@@ -12,13 +12,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Bump versions
+      uses: remorses/bump-version@js
       with:
-        token: ${{ secrets.GITHUB_TOKEN_ACTION }}
-    - name: Bump version and push tag
-      uses: TriPSs/conventional-changelog-action@master
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN_ACTION }}
-        git-message: 'chore(release): {version}'
-
-        tag-prefix: ''
-        output-file: 'VERSION'
+          version_file: ./VERSION
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
