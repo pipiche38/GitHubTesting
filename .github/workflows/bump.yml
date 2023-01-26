@@ -1,10 +1,25 @@
-name: Release Management
+name: Bump version
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - .github/**
+      - 'package.json'
+      - 'Releasenotes.md'
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-on: [push]
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN_ACTION }}
+    - name: Bump version and push tag
+      uses: TriPSs/conventional-changelog-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN_ACTION }}
+        git-message: 'chore(release): {version}'
 
-- name: Bump version
-  uses: remorses/bump-version@js
-  with:
-      version_file: ./VERSION
-  env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        tag-prefix: ''
+        output-file: 'VERSION'
