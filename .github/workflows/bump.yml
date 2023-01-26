@@ -1,4 +1,4 @@
-name: Bump version
+name: Bump version (stable)
 on:
   push:
     branches:
@@ -15,6 +15,7 @@ jobs:
     - name: Bump versions
       uses: remorses/bump-version@js
       with:
-        version_file: ./VERSION
+        prerelease_tag: 'stable'
+        version_file: .VERSION
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
