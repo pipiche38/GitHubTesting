@@ -1,0 +1,22 @@
+name: Bump version (stable)
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '.github/**'
+      - '.VERSION'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Bump versions
+      uses: remorses/bump-version@js
+      with:
+        prerelease_tag: 'stable'
+        version_file: .VERSION
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
