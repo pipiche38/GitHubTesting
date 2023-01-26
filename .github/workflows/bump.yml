@@ -1,14 +1,9 @@
 name: Release Management
 
-on:
+on: [push]
 
-
-jobs:
-  update_draft_release:
-    runs-on: ubuntu-latest
-    steps:
-      uses: remorses/bump-version@v8
-        with:
-         version_file: ./VERSION
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  uses: remorses/bump-version@v8
+  with:
+       version_file: ./VERSION      
+  env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
